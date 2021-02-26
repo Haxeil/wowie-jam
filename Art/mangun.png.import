@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mangun.png-a09b42ab1f04d344c76a49dbae8eeb07.stex"
+path="res://.import/mangun.png-aa4c16eff293a7d0d61a530a30e37e9b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mangun.png"
-dest_files=[ "res://.import/mangun.png-a09b42ab1f04d344c76a49dbae8eeb07.stex" ]
+source_file="res://Art/mangun.png"
+dest_files=[ "res://.import/mangun.png-aa4c16eff293a7d0d61a530a30e37e9b.stex" ]
 
 [params]
 
