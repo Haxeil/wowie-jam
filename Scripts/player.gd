@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
-export(NodePath) var _controller = _controller as CollisionShape2D
+export(float) var SPEED : float = 800
+
+
+
 
 
 
