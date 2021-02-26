@@ -1,0 +1,105 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://GD/Player.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Expl/light1.png" type="Texture" id=3]
+[ext_resource path="res://man.png" type="Texture" id=4]
+[ext_resource path="res://mangun.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Gun",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 60.0
+height = 172.0
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.751678 )
+colors = PoolColorArray( 0.953125, 0.943119, 0.312744, 1, 0.652344, 0.0407715, 0.0407715, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.52462, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 1.0
+angular_velocity = 720.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 10.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+position = Vector2( 197.025, 551.566 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="State" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+animation = "Idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 3, 3 )
+limit_smoothed = true
+smoothing_enabled = true
+
+[node name="Gun" type="Sprite" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 160.108, 0 )
+scale = Vector2( 2, 0.4 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="BulletPoint" type="Node2D" parent="."]
+position = Vector2( 220, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="BulletPoint"]
+scale = Vector2( 4, 4 )
+emitting = false
+amount = 50
+lifetime = 0.2
+one_shot = true
+speed_scale = 4.0
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 7 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 3 )
+texture_scale = 2.0
+energy = 2.0
+shadow_enabled = true
+shadow_filter_smooth = 64.0
